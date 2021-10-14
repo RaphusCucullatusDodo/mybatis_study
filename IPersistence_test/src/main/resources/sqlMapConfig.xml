@@ -1,0 +1,11 @@
+<configuration>
+<!--  数据库配置信息  -->
+    <dataSource>
+        <properties name="driverClass" value="com.mysql.cj.jdbc.Driver"></properties>
+        <properties name="jdbcUrl" value="jdbc:mysql://localhost:3306/custom_mybatis"></properties>
+        <properties name="username" value="root"></properties>
+        <properties name="password" value="088.5741"></properties>
+    </dataSource>
+    <!--  mapper.xml映射配置文件路径  -->
+    <mapper resource="UserMapper.xml"></mapper>
+</configuration>

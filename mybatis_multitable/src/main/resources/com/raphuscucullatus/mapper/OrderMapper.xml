@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.raphuscucullatus.mapper.OrderMapper">
+
+    <select id="findByUid" parameterType="integer" resultType="Order">
+        select * from orders where uid = #{uid}
+    </select>
+
+
+    <!--  一对一查询  -->
+    <resultMap id="orderMap" type="com.raphuscucullatus.pojo.Order" autoMapping="true">
+        <id property="id" column="oid"></id>
+        <result property="orderTime" column="ordertime"></result>
+        <association property="user" javaType="User" autoMapping="true">
+            <id property="id" column="id"></id>
+        </association>
+    </resultMap>
+    <select id="findOrderAndUser" resultMap="orderMap">
+        select *, o.id oid
+        from orders o,
+             user u
+        where o.uid = u.id
+--         select *,o.id oid from user u left join orders o on u.id=o.uid;
+    </select>
+
+    <select id="findOrderByUid" resultType="Order">
+        select *
+        from orders o,
+             user u
+        where uid = #{uid}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!--    开启二级缓存    -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.raphuscucullatus.pojo.User" alias="User"/>
+    </typeAliases>
+    <plugins>
+        <!--        <plugin interceptor="com.raphuscucullatus.plugin.CustomPlugin">-->
+        <!--            <property name="name" value="tom"/>-->
+        <!--        </plugin>-->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!--     dialect(方言):用于指定数据库类型       -->
+            <property name="dialect" value="mysql"/>
+        </plugin>
+        <plugin interceptor="tk.mybatis.mapper.mapperhelper.MapperInterceptor">
+            <!--      指定当前通用mapper接口使用的是哪个类      -->
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--    <mappers>-->
+    <!--        <mapper resource="com/raphuscucullatus/mapper/UserMapper.xml"/>-->
+    <!--    </mappers>-->
+    <mappers>
+<!--    测试传统方式使用mybatis    -->
+        <mapper resource="UserMapper.xml"/>
+
+<!--    测试二级缓存    -->
+        <mapper resource="IUserMapper.xml"/>
+<!--    通用mapper    -->
+<!--        <package name="com.raphuscucullatus.mapper"/>-->
+    </mappers>
+    
+
+</configuration>
+

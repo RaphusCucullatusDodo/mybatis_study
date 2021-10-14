@@ -1,0 +1,12 @@
+<mapper namespace="com.raphuscucullatus.dao.UserDao">
+    <!--
+    statementId:
+        namespace.id 是SQL语句在当前工程中的唯一标识
+    -->
+    <select id="findAll" resultType="com.raphuscucullatus.pojo.User">
+        select id,username from user
+    </select>
+    <select id="findByNameAndId" paramType="com.raphuscucullatus.pojo.User" resultType="com.raphuscucullatus.pojo.User">
+        select id,username from user where id = #{id} and username = #{username}
+    </select>
+</mapper>
